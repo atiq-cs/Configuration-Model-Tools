@@ -1,5 +1,5 @@
 // RandomGraph.cpp
-#include<iostream>
+#include <iostream>
 #include <algorithm>
 #include <vector>
 #include "RandomGraph.h"

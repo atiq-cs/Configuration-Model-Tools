@@ -3,17 +3,11 @@
 *	Date		:	April 20, 2015
 *	Author		:	Atiqur Rahman (mdarahman@cs.stonybrook.edu)
 *	Desc		:	Main program
-*					Supports two types
 *					take a set of input degree sequence and generate a random graph
 *					with same set of degree sequence for each of the vertex
-*					Uniform degree sequence generator: input format
-*					  Number of vertices follows with,
-*						number of degree sequences we want for provided number of vertices
-*						range for random generation: start and end
 *					  Terminates for input 0 nunber of vertices
 *					Output:
 *
-*                  Power law formula: x = [(x1^(n+1) - x0^(n+1))*y + x0^(n+1)]^(1/(n+1))
 *	Status		:	
 */
 
@@ -37,9 +31,9 @@
 int main() {
 	{
 #ifdef FILE_IO
-		// reason why file open might fail in MAC OS X
-		// ref: http://stackoverflow.com/questions/14476655/code-runs-perfect-in-g-but-not-in-xcode-cannot-find-file/14478210#14478210
-		// had to change working directory
+		// reason why file open might fail in MAC OS X, had to change working directory ref:
+// http://stackoverflow.com/questions/14476655/code-runs-perfect-in-g-but-not-in-xcode-cannot-find-file/14478210#14478210
+		
 		std::ifstream inFile("ds-input.txt");	// input for this program
 		if (inFile.good() == false) {
 			std::cout << "File open for reading failed!! Exiting." << std::endl;
@@ -115,7 +109,8 @@ int main() {
 			}
 
 			if (modelgenerator.validate_input() == false) {
-				std::cerr << "Sum of degree sequences is not even! This degree sequence will be skipped." << std::endl;
+				std::cerr << "Sum of degree sequences is not even! This degree sequence will be skipped." << \
+					std::endl;
 				return 0;
 			}
 
