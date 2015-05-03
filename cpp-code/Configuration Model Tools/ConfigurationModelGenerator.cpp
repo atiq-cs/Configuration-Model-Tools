@@ -33,8 +33,9 @@ bool ConfigurationModelGenerator::validate_input() {
 void ConfigurationModelGenerator::print_graph(RandomGraph graph) {
 	std::cout << graph.get_num_nodes() << " " << graph.get_num_edges() << std::endl;
 	for (int i = 0; i < graph.get_num_edges(); i++)
-		std::cout << graph.get_edge(i).first << " " << graph.get_edge(i).second << std::endl;
-	std::cout << std::endl;
+		// std::cout << graph.get_edge(i).first << "," << graph.get_edge(i).second << std::endl;
+		std::cout << graph.get_edge(i).first+1 << " " << graph.get_edge(i).second+1 << std::endl;
+	// std::cout << std::endl;
 }
 
 // Generate the graph, using modern C++ random library

@@ -11,9 +11,8 @@
 *	Status		:	
 */
 
-#include <random>
-#include <vector>
 #include <iostream>
+#include <vector>
 #include <chrono>
 #include <thread>
 #include "DegreeSequenceGenerator.h"
@@ -59,7 +58,7 @@ int main() {
 
 			// Code for power law degree distribution
 			if (is_power_law == true) {
-				// generate_power_law_degree_distribution(num_vertices, degree);
+				generate_power_law_degree_distribution(num_vertices, 1, degree);
 			}
 			// Code for uniform degree distribution
 			else {
@@ -79,7 +78,6 @@ int main() {
 		dst << src.rdbuf();
 	}
 
-
 	// ref: http://en.cppreference.com/w/cpp/chrono/duration
 	std::chrono::seconds file_IO_interval(2);
 	// ref: http://en.cppreference.com/w/cpp/thread/sleep_for
@@ -98,7 +96,10 @@ int main() {
 #endif
 
 		int num_vertices = 0;
-		while (std::cin >> num_vertices && num_vertices) {
+		bool is_power_law = false;
+
+		while (std::cin >> is_power_law >> num_vertices && num_vertices) {
+			std::cout << num_vertices;
 			ConfigurationModelGenerator modelgenerator;
 
 			int degree = 0;
@@ -106,7 +107,15 @@ int main() {
 			for (int i = 0; i < num_vertices; i++) {
 				std::cin >> degree;
 				modelgenerator.add_degree(degree);
+				if (is_power_law) {
+					std::cout << " " << degree;
+				}
+				else if (i == 0)
+					std::cout << " " << degree << std::endl;;
+					
 			}
+			if (is_power_law)
+				std::cout << std::endl;;
 
 			if (modelgenerator.validate_input() == false) {
 				std::cerr << "Sum of degree sequences is not even! This degree sequence will be skipped." << \
