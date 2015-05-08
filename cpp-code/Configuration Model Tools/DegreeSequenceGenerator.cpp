@@ -93,7 +93,7 @@ void generate_power_law_degree_distribution_norm(int nV, int min_degree, int max
 	// power law formula test
 	double d_max = max_degree;		// x_1
 	double d_min = min_degree;		// x_0
-	double k = 3;
+	double k = 10;
 	double k_prime = k+1;
 
 	//double y = 0.1;
