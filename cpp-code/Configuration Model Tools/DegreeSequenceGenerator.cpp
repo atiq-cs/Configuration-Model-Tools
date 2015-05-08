@@ -78,3 +78,50 @@ void generate_power_law_degree_distribution(int nV, int min_degree, int max_degr
 	// end the file with a new line
 	std::cout << std::endl;
 }
+
+/*
+	Power law degree distribution implementation
+	Does normalization as well
+*/
+void generate_power_law_degree_distribution_norm(int nV, int min_degree, int max_degree) {
+	/* Verify degree code block removed
+	reason: we correct the last degree of the output when it degree sum is not even
+	}*/
+
+	std::cout << 1 << " " << nV << std::endl;
+
+	// power law formula test
+	double d_max = max_degree;		// x_1
+	double d_min = min_degree;		// x_0
+	double k = 3;
+	double k_prime = k+1;
+
+	//double y = 0.1;
+	double y_uniform = 1.00 / (nV-1);
+
+
+	//int X = (int) pow(pow_res, 1.00 / k_prime);
+	// double X = pow(pow_res, 1.00 / k_prime);
+	// std::cout << "power law output: " << X << std::endl;
+
+	int i = 0;
+	int degree_sum = 0;
+	// for (double x = min_x; x < max_x + 2 * std::numeric_limits<double>::epsilon(); x += interval_x; i++) {
+	for (double y = 0; i<nV; y += y_uniform, i++) {
+		double pow_res_max = pow(d_max, k_prime);
+		double pow_res_min = pow(d_min, k_prime);
+		double pow_res = (pow_res_max - pow_res_min) * y + pow_res_min;
+		double X = pow(pow_res, 1.00 / k_prime);
+		int degree = max_degree - (int) X;
+		degree_sum += degree;
+		if (i == nV - 1 && degree_sum % 2) {
+			// std::cout << " degree correction for configuration model." << std::endl;
+			X += 1;
+		}
+		std::cout << degree << " ";
+	}
+
+
+	// end the file with a new line
+	std::cout << std::endl;
+}

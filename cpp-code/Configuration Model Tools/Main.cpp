@@ -54,11 +54,13 @@ int main() {
 
 		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
 		// Take each input line
-		while (std::cin >> is_power_law >> is_num_nodes_same >> is_degree_same >> num_iterations >> num_nodes >> start_value) {
+		while (std::cin >> is_power_law >> is_num_nodes_same >> is_degree_same >> num_iterations >> num_nodes >>\
+		start_value) {
 			// number of nodes same, degree varies
 			if (is_num_nodes_same == true && is_degree_same == true) {
 				for (int i = 0; i < num_iterations; i++) {
-					std::cout << (int)is_power_law << " " << num_nodes << " " << start_value << std::endl;
+					std::cout << (int)is_power_law << " " << num_nodes << " " << start_value <<\
+					std::endl;
 				}
 			}
 			else if (is_num_nodes_same == true) {
@@ -114,7 +116,7 @@ int main() {
 
 			// Code for power law degree distribution
 			if (is_power_law == true) {
-				generate_power_law_degree_distribution(num_vertices, 1, degree);
+				generate_power_law_degree_distribution_norm(num_vertices, 1, degree);
 			}
 			// Code for uniform degree distribution
 			else {
