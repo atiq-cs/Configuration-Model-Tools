@@ -16,8 +16,6 @@
 #include <iostream>
 #include <cmath>
 
-// generate_power_law_degree_distribution
-
 void generate_uniform_degree_distribution(int nV, int degree) {
 	// verify degree
 	if (degree % 2 == 1) {
@@ -54,7 +52,7 @@ void generate_power_law_degree_distribution(int nV, int min_degree, int max_degr
 	// assuming values of constants, a and k
 	// requires discussion with professor
 	double a = 2;
-	double k = 2;
+	double k = 6;
 	double k_inverse = 1 / k;
 	double max_x = pow(double(max_degree) / a, k_inverse);
 	double min_x = pow(double(min_degree) / a, k_inverse);
