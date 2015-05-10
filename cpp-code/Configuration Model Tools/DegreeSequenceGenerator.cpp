@@ -86,39 +86,46 @@ void generate_power_law_degree_distribution(int nV, int min_degree, int max_degr
 void generate_power_law_degree_distribution_norm(int nV, int min_degree, int max_degree) {
 	/* Verify degree code block removed
 	reason: we correct the last degree of the output when it degree sum is not even
-	}*/
+	} */
 
-	std::cout << 1 << " " << nV << std::endl;
+	// std::cout << 1 << " " << nV << std::endl;
 
 	// power law formula test
 	double d_max = max_degree;		// x_1
 	double d_min = min_degree;		// x_0
-	double k = 10;
+	double k = 3;
 	double k_prime = k+1;
 
 	//double y = 0.1;
-	double y_uniform = 1.00 / (nV-1);
-
+	int vert_var = (int)ceil(sqrt(1 + 8 * nV) / 2.0 - 0.5);
+	double y_uniform = 1.00 / vert_var;
 
 	//int X = (int) pow(pow_res, 1.00 / k_prime);
 	// double X = pow(pow_res, 1.00 / k_prime);
 	// std::cout << "power law output: " << X << std::endl;
 
-	int i = 0;
+	int i = vert_var;
+	std::cout << 1 << " " << (int)(vert_var*(vert_var + 1) / 2.0) << std::endl;
 	int degree_sum = 0;
+	int vert_sum = 0;
 	// for (double x = min_x; x < max_x + 2 * std::numeric_limits<double>::epsilon(); x += interval_x; i++) {
-	for (double y = 0; i<nV; y += y_uniform, i++) {
+	for (double y = 1; i>=1; y -= y_uniform, i--) {
 		double pow_res_max = pow(d_max, k_prime);
 		double pow_res_min = pow(d_min, k_prime);
 		double pow_res = (pow_res_max - pow_res_min) * y + pow_res_min;
 		double X = pow(pow_res, 1.00 / k_prime);
-		int degree = max_degree - (int) X;
+		int degree = max_degree-(int) X;
 		degree_sum += degree;
 		if (i == nV - 1 && degree_sum % 2) {
 			// std::cout << " degree correction for configuration model." << std::endl;
 			X += 1;
 		}
-		std::cout << degree << " ";
+		/*
+		for (int j = 0; j < i; j++)
+			std::cout << degree << " ";*/
+		std::cout << i << "," << degree << std::endl;
+		vert_sum += i;
+		// std::cout << " got sum " << vert_sum << " ";
 	}
 
 
