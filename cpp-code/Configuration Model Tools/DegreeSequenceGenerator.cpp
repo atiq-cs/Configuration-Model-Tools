@@ -132,3 +132,80 @@ void generate_power_law_degree_distribution_norm(int nV, int min_degree, int max
 	// end the file with a new line
 	std::cout << std::endl;
 }
+
+/*
+Power law degree distribution implementation
+normalization
+negative power
+
+From nV compute mV = number of vertices max on x-axis
+k is the power of power law
+x_0 = 0
+
+
+We correct the last degree of the output when it degree sum is not even
+*/
+void generate_power_law_degree_distribution_norm_pos_p(int nV, int y_max) {
+	// find mV (max number of vertices we use on x-axis) from nV (number of vertices)
+	int mV = (int)ceil(sqrt(1 + 8 * nV) / 2.0 - 0.5);
+	// have to check what comes when we do negative
+	const int k = -3;
+
+	// X axis of power law, we are varying uniformly
+	// y axis won't be uniform
+	double pre_sum_y = 0.0;
+	for (int X = 0; X <= mV; X++) {
+		double numerator = pow((double)X, k + 1.0) - 0;		// x_0 = 0
+		double denumerator = pow(mV, k + 1.0) - 0;	// x_1 = mv; x_0 = 0
+		double y = numerator / denumerator;
+		// int current_y = (int)((y - pre_sum_y)*y_max);
+		double current_y = y - pre_sum_y;
+		std::cout << X << "," << current_y << std::endl;
+		pre_sum_y = y;
+	}
+}
+
+/*
+Power law degree distribution implementation
+normalization
+negative power
+
+From nV compute mV = number of vertices max on x-axis
+k is the power of power law
+x_0 = 0
+
+
+We correct the last degree of the output when it degree sum is not even
+*/
+void generate_power_law_degree_distribution_norm_neg_p(int nV, int y_max) {
+	// find mV (max number of vertices we use on x-axis) from nV (number of vertices)
+	int mV = (int)ceil(sqrt(1 + 8 * nV) / 2.0 - 0.5)+1;
+	// Equation uses -k
+	const int k = 3;
+	int degree_sum = 0;
+
+	// this line is not tested
+	std::cout << 1 << " " << nV << std::endl;
+
+	// X axis of power law, we are varying uniformly
+	// y axis is change upto x_o to x
+	// we take diff to get exact degree for each of X
+	double pre_sum_y = 0.0;
+	for (int X = 1; X <= mV; X++) {
+		double numerator = (pow((double)X, k - 1.0) - 1.0)*pow(mV, k-1.0);		// x_0 = 1
+		double denumerator = (pow(mV, k - 1.0) - 1.0)*(pow((double)X, k - 1.0));	// x_1 = mv; x_0 = 0
+		double y = numerator / denumerator;
+		double current_y = y - pre_sum_y;
+		/*if (X>1)
+			std::cout << (X-1) << "," << current_y*nV << " and sum: " << y*nV << std::endl;*/
+		int degree = (int)(current_y*nV);
+		degree_sum += degree;
+		if (X == nV && degree_sum % 2) {
+			X += 1;
+		}
+
+		if (X>1)
+			std::cout << (X-1) << "," << degree << std::endl;
+		pre_sum_y = y;
+	}
+}

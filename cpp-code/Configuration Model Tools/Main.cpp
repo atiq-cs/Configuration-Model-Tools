@@ -116,7 +116,7 @@ int main() {
 
 			// Code for power law degree distribution
 			if (is_power_law == true) {
-				generate_power_law_degree_distribution_norm(num_vertices, 1, degree);
+				generate_power_law_degree_distribution_norm_neg_p(num_vertices, degree);
 			}
 			// Code for uniform degree distribution
 			else {
