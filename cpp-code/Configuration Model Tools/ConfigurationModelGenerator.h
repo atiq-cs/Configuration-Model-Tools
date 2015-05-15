@@ -15,6 +15,7 @@ public:
 	~ConfigurationModelGenerator();
 	void add_degree(int d);
 	bool validate_input();
+	void fix_degree_sequence();
 	RandomGraph generate_graph();
 	void print_graph(RandomGraph graph);
 };

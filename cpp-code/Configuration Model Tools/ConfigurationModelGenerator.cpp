@@ -29,6 +29,13 @@ bool ConfigurationModelGenerator::validate_input() {
 	return true;
 }
 
+// Fixes input degree sequence
+void ConfigurationModelGenerator::fix_degree_sequence() {
+	if (degree_sum & 0x1) {
+		DegreeSequence[DegreeSequence.size() - 1] += 1;
+	}
+}
+
 // add the degree to the class
 void ConfigurationModelGenerator::print_graph(RandomGraph graph) {
 	std::cout << graph.get_num_nodes() << " " << graph.get_num_edges() << std::endl;
