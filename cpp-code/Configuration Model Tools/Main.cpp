@@ -28,69 +28,70 @@
 
 
 int main() {
+	const int num_iterations = 1;
 	/*
 	// generate sequence of degree, 1000 input
 	{
-#ifdef FILE_IO
-		std::ifstream inFile("iter-in.txt");	// input for this program
-		if (inFile.good() == false) {
-			std::cout << "File open for reading failed!! Exiting." << std::endl;
-			return 0;
-		}
-		std::streambuf *cinbuf = std::cin.rdbuf(); //save old buf
-		std::cin.rdbuf(inFile.rdbuf()); //redirect std::cin to inFile!
+	#ifdef FILE_IO
+	std::ifstream inFile("iter-in.txt");	// input for this program
+	if (inFile.good() == false) {
+	std::cout << "File open for reading failed!! Exiting." << std::endl;
+	return 0;
+	}
+	std::streambuf *cinbuf = std::cin.rdbuf(); //save old buf
+	std::cin.rdbuf(inFile.rdbuf()); //redirect std::cin to inFile!
 
-		std::ofstream outFile("ds-input.txt");	// output for this program
-		if (inFile.good() == false) {
-			std::cout << "File open for writing failed!! Exiting." << std::endl;
-			return 0;
-		}
-		std::streambuf *coutbuf = std::cout.rdbuf();
-		std::cout.rdbuf(outFile.rdbuf());
-#endif
+	std::ofstream outFile("ds-input.txt");	// output for this program
+	if (inFile.good() == false) {
+	std::cout << "File open for writing failed!! Exiting." << std::endl;
+	return 0;
+	}
+	std::streambuf *coutbuf = std::cout.rdbuf();
+	std::cout.rdbuf(outFile.rdbuf());
+	#endif
 
-		bool is_num_nodes_same, is_power_law, is_degree_same;
-		int num_iterations, start_value, diff=0, num_nodes;
+	bool is_num_nodes_same, is_power_law, is_degree_same;
+	int num_iterations, start_value, diff=0, num_nodes;
 
-		std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
-		// Take each input line
-		while (std::cin >> is_power_law >> is_num_nodes_same >> is_degree_same >> num_iterations >> num_nodes >>\
-		start_value) {
-			// number of nodes same, degree varies
-			if (is_num_nodes_same == true && is_degree_same == true) {
-				for (int i = 0; i < num_iterations; i++) {
-					std::cout << (int)is_power_law << " " << num_nodes << " " << start_value <<\
-					std::endl;
-				}
-			}
-			else if (is_num_nodes_same == true) {
-				for (int value = start_value, i = 0; i < num_iterations; i++, value += diff) {
-					std::cout << (int)is_power_law << " " << num_nodes << " " << value << std::endl;
-				}
-			}
-			// number of degrees same, number of nodes varie
-			else {
-				// generate_uniform_degree_distribution(num_vertices, degree);
-			}
-		}
+	std::cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+	// Take each input line
+	while (std::cin >> is_power_law >> is_num_nodes_same >> is_degree_same >> num_iterations >> num_nodes >>\
+	start_value) {
+	// number of nodes same, degree varies
+	if (is_num_nodes_same == true && is_degree_same == true) {
+	for (int i = 0; i < num_iterations; i++) {
+	std::cout << (int)is_power_law << " " << num_nodes << " " << start_value <<\
+	std::endl;
+	}
+	}
+	else if (is_num_nodes_same == true) {
+	for (int value = start_value, i = 0; i < num_iterations; i++, value += diff) {
+	std::cout << (int)is_power_law << " " << num_nodes << " " << value << std::endl;
+	}
+	}
+	// number of degrees same, number of nodes varie
+	else {
+	// generate_uniform_degree_distribution(num_vertices, degree);
+	}
+	}
 
-#ifdef FILE_IO
-		std::cin.rdbuf(cinbuf);
-		inFile.close();
-		std::cout.rdbuf(coutbuf);
-		outFile.close();
-#endif
-		// ref: http://en.cppreference.com/w/cpp/chrono/duration
-		std::chrono::seconds file_IO_interval(2);
-		// ref: http://en.cppreference.com/w/cpp/thread/sleep_for
-		std::this_thread::sleep_for(file_IO_interval);
+	#ifdef FILE_IO
+	std::cin.rdbuf(cinbuf);
+	inFile.close();
+	std::cout.rdbuf(coutbuf);
+	outFile.close();
+	#endif
+	// ref: http://en.cppreference.com/w/cpp/chrono/duration
+	std::chrono::seconds file_IO_interval(2);
+	// ref: http://en.cppreference.com/w/cpp/thread/sleep_for
+	std::this_thread::sleep_for(file_IO_interval);
 	} */
 
 	{
 #ifdef FILE_IO
 		// reason why file open might fail in MAC OS X, had to change working directory ref:
-// http://stackoverflow.com/questions/14476655/code-runs-perfect-in-g-but-not-in-xcode-cannot-find-file/14478210#14478210
-		
+		// http://stackoverflow.com/questions/14476655/code-runs-perfect-in-g-but-not-in-xcode-cannot-find-file/14478210#14478210
+
 		std::ifstream inFile("ds-input.txt");	// input for this program
 		if (inFile.good() == false) {
 			std::cout << "File open for reading failed!! Exiting." << std::endl;
@@ -112,11 +113,10 @@ int main() {
 		int num_vertices, degree;
 
 		// Take each input line
-		while (std::cin >> is_power_law >> num_vertices >> degree) {
-
+		while (std::cin >> num_vertices >> degree >> is_power_law) {
 			// Code for power law degree distribution
 			if (is_power_law == true) {
-				generate_power_law_degree_distribution_norm_neg_p(num_vertices, degree);
+				generate_power_law_degree_distribution_norm_neg_p(num_vertices, 1, degree);
 			}
 			// Code for uniform degree distribution
 			else {
@@ -130,18 +130,83 @@ int main() {
 		std::cout.rdbuf(coutbuf);
 		outFile.close();
 #endif
-		// file copy
-		std::ifstream  src("ds-output.txt", std::ios::binary);
-		std::ofstream  dst("cf-input.txt", std::ios::binary);
-		dst << src.rdbuf();
 	}
-
-	// Second part: Random Graph Generator
-	{
+	{/*
 		// ref: http://en.cppreference.com/w/cpp/chrono/duration
-		std::chrono::seconds file_IO_interval(2);
+		std::chrono::seconds file_IO_interval(1);
 		// ref: http://en.cppreference.com/w/cpp/thread/sleep_for
 		std::this_thread::sleep_for(file_IO_interval);
+
+		/* // wait for fixing file
+		{
+			int test = 0;
+			std::cout << "press a key to fix last degree...";
+			std::cin >> test;
+		}*/
+
+#ifdef FILE_IO
+		// reason why file open might fail in MAC OS X, had to change working directory ref:
+		// http://stackoverflow.com/questions/14476655/code-runs-perfect-in-g-but-not-in-xcode-cannot-find-file/14478210#14478210
+
+		std::ifstream inFile("ds-output.txt");	// input for this program
+		if (inFile.good() == false) {
+			std::cout << "File open for reading failed!! Exiting." << std::endl;
+			return 0;
+		}
+		std::streambuf *cinbuf = std::cin.rdbuf(); //save old buf
+		std::cin.rdbuf(inFile.rdbuf()); //redirect std::cin to inFile!
+
+		std::ofstream outFile("cf-input.txt");	// output for this program
+		if (inFile.good() == false) {
+			std::cout << "File open for writing failed!! Exiting." << std::endl;
+			return 0;
+		}
+		std::streambuf *coutbuf = std::cout.rdbuf();
+		std::cout.rdbuf(outFile.rdbuf());
+#endif
+		bool is_power_law;
+		int num_vertices, degree;
+
+		std::cin >> is_power_law >> num_vertices;
+
+		std::vector<int> degree_list(num_vertices);
+		degree_list.clear();
+
+		while (std::cin >> degree) {
+			degree_list.push_back(degree);
+		}
+		std::cerr << "Vertices lost: " << (int)abs((int)(degree_list.size()-num_vertices))<< \
+			std::endl;
+
+		for (int i = 0; i < num_iterations; i++) {
+			std::cout << (int)is_power_law << " " << degree_list.size() << std::endl;
+
+			for (int i = 0; i < degree_list.size(); i++) {
+				std::cout << " " << degree_list[i];
+			}
+			std::cout << std::endl;
+		}
+#ifdef FILE_IO
+		std::cin.rdbuf(cinbuf);
+		inFile.close();
+		std::cout.rdbuf(coutbuf);
+		outFile.close();
+#endif
+		/*		else {
+			std::ofstream dst("cf-input.txt", std::ios::binary);
+			std::ifstream src("ds-output.txt", std::ios::binary);
+			dst << src.rdbuf();
+			src.close();
+			dst.close();
+		}*/
+	}
+
+	/* // Second part: Random Graph Generator
+	{
+		// ref: http://en.cppreference.com/w/cpp/chrono/duration
+		//std::chrono::seconds file_IO_interval(2);
+		// ref: http://en.cppreference.com/w/cpp/thread/sleep_for
+		//std::this_thread::sleep_for(file_IO_interval);
 
 #ifdef FILE_IO
 		std::ifstream inFile("cf-input.txt");
@@ -155,6 +220,7 @@ int main() {
 
 		int num_vertices = 0;
 		bool is_power_law = false;
+		std::cout << num_iterations << std::endl;
 
 		while (std::cin >> is_power_law >> num_vertices && num_vertices) {
 			std::cout << num_vertices;
@@ -166,14 +232,16 @@ int main() {
 				std::cin >> degree;
 				modelgenerator.add_degree(degree);
 				if (is_power_law) {
-					std::cout << " " << degree;
+					// std::cout << " " << degree;
+					if (i == num_vertices-1)
+						std::cout << " " << degree << std::endl;;
 				}
 				else if (i == 0)
 					std::cout << " " << degree << std::endl;;
 					
 			}
-			if (is_power_law)
-				std::cout << std::endl;;
+			// if (is_power_law)
+				// std::cout << std::endl;;
 
 			if (modelgenerator.validate_input() == false) {
 				std::cerr << "Sum of degree sequences is not even! This degree sequence will be skipped." << \
@@ -192,7 +260,6 @@ int main() {
 		std::cout.rdbuf(coutbuf);
 		outFile.close();
 #endif
-
-	}
+	}*/
 	return 0;
 }
