@@ -7,3 +7,5 @@ This is,
 
 Demos,
 - A working Unix Makefile for build as well
+
+Some code revisions are added to the [Supplement](https://github.com/atiq-cs/Configuration-Model-Tools/blob/dev/Supplement.md).
