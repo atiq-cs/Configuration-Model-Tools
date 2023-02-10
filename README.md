@@ -8,4 +8,7 @@ This is,
 Demos,
 - A working Unix Makefile for build as well
 
-Some code revisions are added to the [Supplement](https://github.com/atiq-cs/Configuration-Model-Tools/blob/dev/Supplement.md).
+
+Input Output Samples are in [io-samples](https://github.com/atiq-cs/Configuration-Model-Tools/tree/dev/io-samples) dir.  
+
+*Some code revisions are added to the [Supplement](https://github.com/atiq-cs/Configuration-Model-Tools/blob/dev/Supplement.md).*

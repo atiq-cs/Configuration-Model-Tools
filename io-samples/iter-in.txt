@@ -1,0 +1,7 @@
+# is_power_law >> is_num_nodes_same >> is_degree_same >> num_iterations >> start_value >> diff >> num_nodes
+0 1 1 1000 40 6
+0 1 1 1000 40 12
+0 1 1 1000 40 18
+0 1 1 1000 20 6
+0 1 1 1000 35 6
+0 1 1 1000 50 6
