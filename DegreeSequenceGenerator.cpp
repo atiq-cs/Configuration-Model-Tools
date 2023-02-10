@@ -1,16 +1,18 @@
-/*  DegreeSequenceGenerator.cpp
-*	Problem Title:	Degree Sequence Generator
-*	Updated		:	May 14, 2015
-*	Author		:	Atiqur Rahman (mdarahman@cs.stonybrook.edu)
-*	Desc		:	
-*					Supports two types
-*					Uniform degree sequence generator: input format
-*					  Number of vertices follows with,
-*						number of degree sequences we want for provided number of vertices
-*
-*					Power law degree distribution with constant a and k
-*	Status		:	
-*/
+//
+// PURPOSE: Degree Sequence Generator
+//
+// Author : Atiq Rahman
+// Date   : 05-14-2015
+// Status : 
+// Remarks: Supports two types
+//    Uniform degree sequence generator: input format
+//      Number of vertices follows with,
+//        number of degree sequences we want for provided number of vertices
+//
+//     Power law degree distribution with constant a and k
+//
+
+
 #include <iostream>
 #include <cmath>
 
